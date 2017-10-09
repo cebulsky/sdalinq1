@@ -27,10 +27,11 @@ namespace ConsoleLinqToObjects
         private static void ShowFibonacciNumbers()
         {
             int[] fibonacci = { 0, 1, 1, 2, 3, 5 };
+
             // query created, and immediately executed
-            var numbersGreaterThanTwo = fibonacci.Where(x => x > 2).ToArray();
-            fibonacci[0] = 99;
-            foreach (var number in numbersGreaterThanTwo)
+            var everySecondNumber = fibonacci.Where((x, index) => index % 2 == 0).ToArray();
+
+            foreach (var number in everySecondNumber)
             {
                 Console.WriteLine(number);
             }
