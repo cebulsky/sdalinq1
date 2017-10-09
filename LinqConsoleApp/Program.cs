@@ -18,8 +18,15 @@ namespace ConsoleLinqToObjects
             var directoryInfo = new DirectoryInfo(path);
             var filesInfo = directoryInfo.GetFiles();
             Array.Sort(filesInfo, new FileSizeComparer());
-            foreach (var fi in filesInfo)
+
+            //foreach (var fi in filesInfo)
+            //{
+            //    Console.WriteLine($"{fi.Name,-25} size: {fi.Length,10:N0}");
+            //}
+
+            for (int i = 0; i < 5; i++)
             {
+                var fi = filesInfo[i];
                 Console.WriteLine($"{fi.Name,-25} size: {fi.Length,10:N0}");
             }
         }
