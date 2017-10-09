@@ -16,10 +16,24 @@ namespace ConsoleLinqToObjects
             //GetTop5LargestFileUsingLinq(path);
             //GetCulturesWithCommaSeparatorWithoutLinq();
             //GetCulturesWithCommaSeparatorUsingLinq();
-            ShowDecimalSeparatorInfo(".");
-            ShowDecimalSeparatorInfo(",");
-
+            //ShowDecimalSeparatorInfo(".");
+            //ShowDecimalSeparatorInfo(",");
+            ShowAlbanianDayNames();
             Console.ReadLine();
+        }
+
+        private static void ShowAlbanianDayNames()
+        {
+            var availableCultures = CultureInfo.GetCultures(CultureTypes.AllCultures);
+
+            var test = from ci in availableCultures
+                       where ci.DisplayName.Contains("Alban")
+                       select ci.DateTimeFormat.DayNames;
+
+            foreach (var t in test.First())
+            {
+                Console.WriteLine(t);
+            }
         }
 
         private static void ShowDecimalSeparatorInfo(string decimalSeparator)
