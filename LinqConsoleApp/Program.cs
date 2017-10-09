@@ -15,8 +15,22 @@ namespace ConsoleLinqToObjects
             //GetFilesNamesAndSizeWithoutLinq(path);
             //GetTop5LargestFileUsingLinq(path);
             //GetCulturesWithCommaSeparatorWithoutLinq();
-            GetCulturesWithCommaSeparatorUsingLinq();
+            //GetCulturesWithCommaSeparatorUsingLinq();
+            ShowDecimalSeparatorInfo(".");
+            ShowDecimalSeparatorInfo(",");
+
             Console.ReadLine();
+        }
+
+        private static void ShowDecimalSeparatorInfo(string decimalSeparator)
+        {
+            var availableCultures = CultureInfo.GetCultures(CultureTypes.AllCultures);
+            var culturesCountWithParticularSeparator =
+                from ci in availableCultures
+                where ci.NumberFormat.CurrencyDecimalSeparator.Equals(decimalSeparator)
+                select ci;
+
+            Console.WriteLine($"Kultur o separatorze '{decimalSeparator}' jest: {culturesCountWithParticularSeparator.Count()}");
         }
 
         private static void GetCulturesWithCommaSeparatorUsingLinq()
