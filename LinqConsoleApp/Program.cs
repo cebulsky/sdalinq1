@@ -19,8 +19,22 @@ namespace ConsoleLinqToObjects
             //ShowDecimalSeparatorInfo(".");
             //ShowDecimalSeparatorInfo(",");
             //ShowAlbanianDayNames();
-            ShowUniqueDateTimeFormats();
+            //ShowUniqueDateTimeFormats();
+            ShowFibonacciNumbers();
             Console.ReadLine();
+        }
+
+        private static void ShowFibonacciNumbers()
+        {
+            int[] fibonacci = { 0, 1, 1, 2, 3, 5 };
+            // query created, but not yet executed
+            IEnumerable<int> numbersGreaterThanTwoQuery = fibonacci.Where(x => x > 2);
+            fibonacci[0] = 99;
+            // query goes executed
+            foreach (var number in numbersGreaterThanTwoQuery)
+            {
+                Console.WriteLine(number);
+            }
         }
 
         private static void ShowUniqueDateTimeFormats()
@@ -28,7 +42,7 @@ namespace ConsoleLinqToObjects
             var availableCultures = CultureInfo.GetCultures(CultureTypes.AllCultures);
 
             var dateTimePatterns = from ci in availableCultures
-                       select ci.DateTimeFormat.FullDateTimePattern;
+                                   select ci.DateTimeFormat.FullDateTimePattern;
 
             foreach (var t in dateTimePatterns.Distinct())
             {
