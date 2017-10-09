@@ -27,20 +27,13 @@ namespace ConsoleLinqToObjects
         private static void ShowFibonacciNumbers()
         {
             int[] fibonacci = { 0, 1, 1, 2, 3, 5 };
-            // query created, but not yet executed
-            IEnumerable<int> numbersGreaterThanTwoQuery = fibonacci.Where(x => x > 2);
+            // query created, and immediately executed
+            var numbersGreaterThanTwo = fibonacci.Where(x => x > 2).ToArray();
             fibonacci[0] = 99;
-
-            Console.WriteLine("Unikalne liczby:");
-
-            // query goes executed
-            foreach (var number in fibonacci.Distinct())
+            foreach (var number in numbersGreaterThanTwo)
             {
                 Console.WriteLine(number);
             }
-
-            Console.WriteLine($"\nPierwszy element: {fibonacci.First()}");
-            Console.WriteLine($"\nOstatni element: {fibonacci.Last()}");
         }
 
         private static void ShowUniqueDateTimeFormats()
