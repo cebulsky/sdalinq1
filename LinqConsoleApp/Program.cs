@@ -14,8 +14,23 @@ namespace ConsoleLinqToObjects
             string path = @"C:\Windows\";
             //GetFilesNamesAndSizeWithoutLinq(path);
             //GetTop5LargestFileUsingLinq(path);
-            GetCulturesWithCommaSeparatorWithoutLinq();
+            //GetCulturesWithCommaSeparatorWithoutLinq();
+            GetCulturesWithCommaSeparatorUsingLinq();
             Console.ReadLine();
+        }
+
+        private static void GetCulturesWithCommaSeparatorUsingLinq()
+        {
+            var availableCultures = CultureInfo.GetCultures(CultureTypes.AllCultures);
+
+            var culturesWithCommaSeparator = from ci in availableCultures
+                                             where ci.NumberFormat.CurrencyDecimalSeparator.Equals(",")
+                                             select ci;
+
+            foreach (var ci in culturesWithCommaSeparator)
+            {
+                Console.WriteLine($"{ci.DisplayName}");
+            }
         }
 
         private static void GetCulturesWithCommaSeparatorWithoutLinq()
