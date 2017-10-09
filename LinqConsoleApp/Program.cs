@@ -29,9 +29,9 @@ namespace ConsoleLinqToObjects
             int[] fibonacci = { 0, 1, 1, 2, 3, 5 };
 
             // query created, and immediately executed
-            var everySecondNumber = fibonacci.Where((x, index) => index % 2 == 0).ToArray();
+            var twoNumbersFromTheMiddle = fibonacci.Skip(2).Take(2);
 
-            foreach (var number in everySecondNumber)
+            foreach (var number in twoNumbersFromTheMiddle)
             {
                 Console.WriteLine(number);
             }
