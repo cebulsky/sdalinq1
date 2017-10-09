@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -12,8 +13,21 @@ namespace ConsoleLinqToObjects
         {
             string path = @"C:\Windows\";
             //GetFilesNamesAndSizeWithoutLinq(path);
-            GetTop5LargestFileUsingLinq(path);
+            //GetTop5LargestFileUsingLinq(path);
+            GetCulturesWithCommaSeparatorWithoutLinq();
             Console.ReadLine();
+        }
+
+        private static void GetCulturesWithCommaSeparatorWithoutLinq()
+        {
+            var availableCultures = CultureInfo.GetCultures(CultureTypes.AllCultures);
+            foreach (var ci in availableCultures)
+            {
+                if (ci.NumberFormat.NumberDecimalSeparator == ",")
+                {
+                    Console.WriteLine($"{ci.DisplayName}");
+                }
+            }
         }
 
         private static void GetFilesNamesAndSizeWithoutLinq(string path)
