@@ -30,11 +30,17 @@ namespace ConsoleLinqToObjects
             // query created, but not yet executed
             IEnumerable<int> numbersGreaterThanTwoQuery = fibonacci.Where(x => x > 2);
             fibonacci[0] = 99;
+
+            Console.WriteLine("Unikalne liczby:");
+
             // query goes executed
-            foreach (var number in numbersGreaterThanTwoQuery)
+            foreach (var number in fibonacci.Distinct())
             {
                 Console.WriteLine(number);
             }
+
+            Console.WriteLine($"\nPierwszy element: {fibonacci.First()}");
+            Console.WriteLine($"\nOstatni element: {fibonacci.Last()}");
         }
 
         private static void ShowUniqueDateTimeFormats()
