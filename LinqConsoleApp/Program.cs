@@ -18,8 +18,27 @@ namespace ConsoleLinqToObjects
             //GetCulturesWithCommaSeparatorUsingLinq();
             //ShowDecimalSeparatorInfo(".");
             //ShowDecimalSeparatorInfo(",");
-            ShowAlbanianDayNames();
+            //ShowAlbanianDayNames();
+            ShowUniqueDateTimeFormats();
             Console.ReadLine();
+        }
+
+        private static void ShowUniqueDateTimeFormats()
+        {
+            var availableCultures = CultureInfo.GetCultures(CultureTypes.AllCultures);
+
+            var dateTimePatterns = from ci in availableCultures
+                       select ci.DateTimeFormat.FullDateTimePattern;
+
+            foreach (var t in dateTimePatterns.Distinct())
+            {
+                Console.WriteLine(t);
+            }
+
+            var uniqueDateTimePatternCount = dateTimePatterns.Distinct().Count();
+
+            Console.WriteLine();
+            Console.WriteLine($"Unikalnych formatów datetime jest: {uniqueDateTimePatternCount}");
         }
 
         private static void ShowAlbanianDayNames()
