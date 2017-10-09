@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 namespace ConsoleLinqToObjects
@@ -10,9 +11,11 @@ namespace ConsoleLinqToObjects
         static void Main(string[] args)
         {
             string path = @"C:\Windows\";
-            GetFilesNamesAndSizeWithoutLinq(path);
+            //GetFilesNamesAndSizeWithoutLinq(path);
+            GetTop5LargestFileUsingLinq(path);
             Console.ReadLine();
         }
+
         private static void GetFilesNamesAndSizeWithoutLinq(string path)
         {
             var directoryInfo = new DirectoryInfo(path);
@@ -27,6 +30,18 @@ namespace ConsoleLinqToObjects
             for (int i = 0; i < 5; i++)
             {
                 var fi = filesInfo[i];
+                Console.WriteLine($"{fi.Name,-25} size: {fi.Length,10:N0}");
+            }
+        }
+
+        private static void GetTop5LargestFileUsingLinq(string path)
+        {
+            var directoryInfo = new DirectoryInfo(path);
+            var filesInfo = from file in directoryInfo.GetFiles()
+                            orderby file.Length descending
+                            select file;
+            foreach (var fi in filesInfo.Take(5))
+            {
                 Console.WriteLine($"{fi.Name,-25} size: {fi.Length,10:N0}");
             }
         }
