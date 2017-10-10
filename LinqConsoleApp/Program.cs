@@ -90,6 +90,39 @@ namespace ConsoleLinqToObjects
             Console.WriteLine($"Maksymalne zarobiki: {employees.Max(e => e.Salary)}");
             Console.WriteLine($"Średnie zarobiki: {employees.Average(e => e.Salary)}");
             Console.WriteLine($"Minimalne zarobiki: {employees.Min(e => e.Salary)}");
+
+            object[] objects = {
+                new Employee()
+                {
+                Name = "Marianna",
+                Surname = "Mazur",
+                Salary = 5300,
+                HireDate = DateTime.Now.AddYears(-1),
+                },
+                "napis",
+                34.5,
+                new Employee()
+                {
+                Name = "Marcin",
+                Surname = "Lewandowski",
+                Salary = 3200,
+                HireDate = DateTime.Now.AddYears(-3),
+                },
+                4 };
+
+            Console.WriteLine();
+
+            var tableOfEmployees = objects.OfType<Employee>().ToArray();
+
+            Console.WriteLine("Zastosowanie metody OfType<Employee> zwróci tablicę tylko obiektów typu Employee:");
+            foreach (var emp in tableOfEmployees)
+            {
+                Console.WriteLine($"{emp.Name}, {emp.Surname}");
+            }
+
+            Console.WriteLine("Zastosowanie metody Cast<Employee> zwróci wyjątek - nie wszystkie elementy tablicy objects są typu Employee - wciśnij ENTER");
+            Console.ReadLine();
+            var zwrociWyjatek = objects.Cast<Employee>().ToArray();
         }
 
         private static void ShowFibonacciNumbers()
