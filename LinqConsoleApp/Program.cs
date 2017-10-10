@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LinqConsoleApp.EF;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -21,9 +22,24 @@ namespace ConsoleLinqToObjects
             //ShowAlbanianDayNames();
             //ShowUniqueDateTimeFormats();
             //ShowFibonacciNumbers();
-            Filtering();
+            //Filtering();
             //ConcatUnionTest();
+            EkstraklasaTest();
             Console.ReadLine();
+        }
+
+        private static void EkstraklasaTest()
+        {
+            using (var dbContext = new EkstraklasaContext())
+            {
+                var trenerzyBezKlubu = from trener in dbContext.Trener
+                                       where !trener.Klub.Any()
+                                       select trener;
+                foreach (var trener in trenerzyBezKlubu)
+                {
+                    Console.WriteLine($"{trener.Imie} {trener.Nazwisko}");
+                }
+            }
         }
 
         private static void ConcatUnionTest()
