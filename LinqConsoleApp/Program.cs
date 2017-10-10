@@ -115,6 +115,35 @@ namespace ConsoleLinqToObjects
             Console.WriteLine($"Czy wszyscy zarabiają >3000? {employees.All(e => e.Salary > 3000)}");
             Console.WriteLine($"Czy ktokolwiek zarabia <3000? {employees.Any(e => e.Salary < 3000)}");
 
+            Console.WriteLine();
+
+            var groupedEmployees = employees.GroupBy(e => e.HireDate.Year);
+
+            foreach (var ge in groupedEmployees)
+            {
+                Console.WriteLine($"Rok zatrudnienia: {ge.Key}");
+                foreach (var emp in ge)
+                {
+                    Console.WriteLine($"{emp.Name} {emp.Surname}");
+                }
+            }
+
+            Console.WriteLine();
+            Console.WriteLine("Analogiczny sposob grupowania z anomimowym typem:");
+
+            var anotherGroupedEmployees = from emp in employees
+                                          group emp by emp.HireDate.Year into ge
+                                          select new { RokZatrudnienie = ge.Key, Pracownicy = ge };
+
+            foreach (var ge in anotherGroupedEmployees)
+            {
+                Console.WriteLine($"Rok zatrudnienia: {ge.RokZatrudnienie}");
+                foreach (var emp in ge.Pracownicy)
+                {
+                    Console.WriteLine($"{emp.Name} {emp.Surname}");
+                }
+            }
+
             //var filteredEmployees = employees.Where(e => e.Salary > 4000);
 
             //foreach (var emp in filteredEmployees)
