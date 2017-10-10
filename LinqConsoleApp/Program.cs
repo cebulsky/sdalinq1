@@ -20,8 +20,76 @@ namespace ConsoleLinqToObjects
             //ShowDecimalSeparatorInfo(",");
             //ShowAlbanianDayNames();
             //ShowUniqueDateTimeFormats();
-            ShowFibonacciNumbers();
+            //ShowFibonacciNumbers();
+            Filtering();
             Console.ReadLine();
+        }
+
+        private static void Filtering()
+        {
+            List<Employee> employees = new List<Employee>();
+            employees.AddRange(new Employee[] {
+                new Employee()
+                {
+                    Name = "Jan",
+                    Surname = "Kowalski",
+                    Salary = 2500,
+                    HireDate = DateTime.Now.AddYears(-2),
+                },
+                new Employee()
+                {
+                    Name = "Piotr",
+                    Surname = "Nowak",
+                    Salary = 3000,
+                    HireDate = DateTime.Now.AddYears(-1),
+                },
+                new Employee()
+                {
+                    Name = "Mariusz",
+                    Surname = "Kolas",
+                    Salary = 4000,
+                    HireDate = DateTime.Now.AddYears(-5),
+                },
+                new Employee()
+                {
+                    Name = "Marcin",
+                    Surname = "Lewandowski",
+                    Salary = 3200,
+                    HireDate = DateTime.Now.AddYears(-3),
+                },
+                new Employee()
+                {
+                    Name = "Joanna",
+                    Surname = "Kowalczyk",
+                    Salary = 2800,
+                    HireDate = DateTime.Now.AddYears(-3),
+                },
+                new Employee()
+                {
+                    Name = "Agnieszka",
+                    Surname = "Marchlewicz",
+                    Salary = 3400,
+                    HireDate = DateTime.Now.AddYears(-2),
+                },
+                new Employee()
+                {
+                    Name = "Marianna",
+                    Surname = "Mazur",
+                    Salary = 5300,
+                    HireDate = DateTime.Now.AddYears(-1),
+                }
+            });
+
+            var filteredEmployees = employees.Where(e => e.Salary > 4000);
+
+            foreach (var emp in filteredEmployees)
+            {
+                Console.WriteLine($"{emp.Surname}, {emp.Name}, Salary: {emp.Salary}");
+            }
+
+            Console.WriteLine($"Maksymalne zarobiki: {employees.Max(e => e.Salary)}");
+            Console.WriteLine($"Średnie zarobiki: {employees.Average(e => e.Salary)}");
+            Console.WriteLine($"Minimalne zarobiki: {employees.Min(e => e.Salary)}");
         }
 
         private static void ShowFibonacciNumbers()
@@ -142,5 +210,13 @@ namespace ConsoleLinqToObjects
         {
             return y.Length.CompareTo(x.Length);
         }
+    }
+
+    public class Employee
+    {
+        public string Name { get; set; }
+        public string Surname { get; set; }
+        public decimal Salary { get; set; }
+        public DateTime HireDate { get; set; }
     }
 }
