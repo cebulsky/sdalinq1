@@ -39,6 +39,15 @@ namespace ConsoleLinqToObjects
                 {
                     Console.WriteLine($"{trener.Imie} {trener.Nazwisko}");
                 }
+
+                Console.WriteLine();
+                Console.WriteLine("Ilosc zawodnikow w klubach:");
+                var klubZawodnicy = dbContext.Zawodnik.GroupBy(z => z.Klub);
+
+                foreach (var kz in klubZawodnicy)
+                {
+                    Console.WriteLine($"Klub: {kz.Key.Nazwa}, zawodników: {kz.Count()}");
+                }
             }
         }
 
