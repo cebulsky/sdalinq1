@@ -108,8 +108,12 @@ namespace ConsoleLinqToObjects
 
             foreach (var emp in sortedEmployees)
             {
-                Console.WriteLine($"Salary: {emp.Salary, -10} HireDate: {emp.HireDate.ToShortDateString()} {emp.Surname, -20} {emp.Name, -20}");
+                Console.WriteLine($"Salary: {emp.Salary,-10} HireDate: {emp.HireDate.ToShortDateString()} {emp.Surname,-20} {emp.Name,-20}");
             }
+
+            Console.WriteLine();
+            Console.WriteLine($"Czy wszyscy zarabiają >3000? {employees.All(e => e.Salary > 3000)}");
+            Console.WriteLine($"Czy ktokolwiek zarabia <3000? {employees.Any(e => e.Salary < 3000)}");
 
             //var filteredEmployees = employees.Where(e => e.Salary > 4000);
 
