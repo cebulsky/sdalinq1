@@ -21,8 +21,8 @@ namespace ConsoleLinqToObjects
             //ShowAlbanianDayNames();
             //ShowUniqueDateTimeFormats();
             //ShowFibonacciNumbers();
-            //Filtering();
-            ConcatUnionTest();
+            Filtering();
+            //ConcatUnionTest();
             Console.ReadLine();
         }
 
@@ -104,49 +104,56 @@ namespace ConsoleLinqToObjects
                 }
             });
 
-            var filteredEmployees = employees.Where(e => e.Salary > 4000);
+            var sortedEmployees = employees.OrderByDescending(e => e.Salary).ThenBy(e => e.HireDate);
 
-            foreach (var emp in filteredEmployees)
+            foreach (var emp in sortedEmployees)
             {
-                Console.WriteLine($"{emp.Surname}, {emp.Name}, Salary: {emp.Salary}");
+                Console.WriteLine($"Salary: {emp.Salary, -10} HireDate: {emp.HireDate.ToShortDateString()} {emp.Surname, -20} {emp.Name, -20}");
             }
 
-            Console.WriteLine($"Maksymalne zarobiki: {employees.Max(e => e.Salary)}");
-            Console.WriteLine($"Średnie zarobiki: {employees.Average(e => e.Salary)}");
-            Console.WriteLine($"Minimalne zarobiki: {employees.Min(e => e.Salary)}");
+            //var filteredEmployees = employees.Where(e => e.Salary > 4000);
 
-            object[] objects = {
-                new Employee()
-                {
-                Name = "Marianna",
-                Surname = "Mazur",
-                Salary = 5300,
-                HireDate = DateTime.Now.AddYears(-1),
-                },
-                "napis",
-                34.5,
-                new Employee()
-                {
-                Name = "Marcin",
-                Surname = "Lewandowski",
-                Salary = 3200,
-                HireDate = DateTime.Now.AddYears(-3),
-                },
-                4 };
+            //foreach (var emp in filteredEmployees)
+            //{
+            //    Console.WriteLine($"{emp.Surname}, {emp.Name}, Salary: {emp.Salary}");
+            //}
 
-            Console.WriteLine();
+            //Console.WriteLine($"Maksymalne zarobiki: {employees.Max(e => e.Salary)}");
+            //Console.WriteLine($"Średnie zarobiki: {employees.Average(e => e.Salary)}");
+            //Console.WriteLine($"Minimalne zarobiki: {employees.Min(e => e.Salary)}");
 
-            var tableOfEmployees = objects.OfType<Employee>().ToArray();
+            //object[] objects = {
+            //    new Employee()
+            //    {
+            //    Name = "Marianna",
+            //    Surname = "Mazur",
+            //    Salary = 5300,
+            //    HireDate = DateTime.Now.AddYears(-1),
+            //    },
+            //    "napis",
+            //    34.5,
+            //    new Employee()
+            //    {
+            //    Name = "Marcin",
+            //    Surname = "Lewandowski",
+            //    Salary = 3200,
+            //    HireDate = DateTime.Now.AddYears(-3),
+            //    },
+            //    4 };
 
-            Console.WriteLine("Zastosowanie metody OfType<Employee> zwróci tablicę tylko obiektów typu Employee:");
-            foreach (var emp in tableOfEmployees)
-            {
-                Console.WriteLine($"{emp.Name}, {emp.Surname}");
-            }
+            //Console.WriteLine();
 
-            Console.WriteLine("Zastosowanie metody Cast<Employee> zwróci wyjątek - nie wszystkie elementy tablicy objects są typu Employee - wciśnij ENTER");
-            Console.ReadLine();
-            var zwrociWyjatek = objects.Cast<Employee>().ToArray();
+            //var tableOfEmployees = objects.OfType<Employee>().ToArray();
+
+            //Console.WriteLine("Zastosowanie metody OfType<Employee> zwróci tablicę tylko obiektów typu Employee:");
+            //foreach (var emp in tableOfEmployees)
+            //{
+            //    Console.WriteLine($"{emp.Name}, {emp.Surname}");
+            //}
+
+            //Console.WriteLine("Zastosowanie metody Cast<Employee> zwróci wyjątek - nie wszystkie elementy tablicy objects są typu Employee - wciśnij ENTER");
+            //Console.ReadLine();
+            //var zwrociWyjatek = objects.Cast<Employee>().ToArray();
         }
 
         private static void ShowFibonacciNumbers()
