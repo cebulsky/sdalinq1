@@ -21,8 +21,32 @@ namespace ConsoleLinqToObjects
             //ShowAlbanianDayNames();
             //ShowUniqueDateTimeFormats();
             //ShowFibonacciNumbers();
-            Filtering();
+            //Filtering();
+            ConcatUnionTest();
             Console.ReadLine();
+        }
+
+        private static void ConcatUnionTest()
+        {
+            string[] penPineapple = { "Pen", "Pineapple" };
+            string[] applePen = { "Apple", "Pen" };
+
+            Console.WriteLine("Metoda Concat zwróci:");
+            var concatenated = penPineapple.Concat(applePen);
+
+            foreach (var word in concatenated)
+            {
+                Console.WriteLine(word);
+            }
+
+            Console.WriteLine();
+            Console.WriteLine("Metoda Union zwróci:");
+            var unioned = penPineapple.Union(applePen);
+
+            foreach (var word in unioned)
+            {
+                Console.WriteLine(word);
+            }
         }
 
         private static void Filtering()
